@@ -10,10 +10,8 @@
   "dependencies": {
     "@svgr/webpack": "^5.4.0",
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
     "google-map-react": "^1.1.7",
     "next": "9.4.4",
-    "node-fetch": "^2.6.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "styled-jsx": "^3.3.0"
