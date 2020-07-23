@@ -31,10 +31,11 @@ const SliderForm = ({ onFormSubmit, defaultCount }) => {
               max="50"
               value={driversCount}
               onChange={handleChange}
+              data-testid="input-range"
             />
             <span className="rangeValue">50</span>
           </div>
-          <button>
+          <button data-testid="form-button">
             Show {driversCount} {driversCount > 1 ? "drivers" : "driver"}
           </button>
         </div>

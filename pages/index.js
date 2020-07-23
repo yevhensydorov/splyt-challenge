@@ -6,6 +6,7 @@ import appContainerStyles from "../styles/appContainerStyles";
 
 import Map from "../components/Map";
 import SliderForm from "../components/SliderForm";
+import Loading from "../components/Loading";
 
 import { SPLYT_COORDINATES } from "../constants/constants";
 
@@ -36,24 +37,24 @@ export default function Home() {
     fetchData();
   }, [count]);
 
-  if (error) {
-    return <div>There is an error fetching drivers</div>;
-  }
-
-  if (!result) {
-    return <div>Data is loading...</div>;
-  }
-
   return (
     <>
       <div className="container">
         <Head>
           <title>Splyt challenge</title>
         </Head>
-
         <h1>Splyt challenge</h1>
         <SliderForm onFormSubmit={handleSubmit} defaultCount={count} />
-        <Map driversList={result.drivers} />
+
+        {/*
+          Enhance/Improvement: create proper Error handling component
+        */}
+        {error && <div>There is an error fetching drivers</div>}
+
+        {/*
+              Enhance/Improvement: use 'isLoading' variable to handle Loading state
+        */}
+        {!result ? <Loading /> : <Map driversList={result.drivers} />}
       </div>
 
       <style jsx>{appContainerStyles}</style>
