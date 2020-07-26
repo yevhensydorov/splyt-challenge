@@ -1,11 +1,12 @@
 import Cors from "cors";
+import { NextApiRequest, NextApiResponse } from "next";
 
 import { API_SERVER_URL } from "../../constants/constants";
 
-function initMiddleware(middleware) {
-  return (req, res) =>
+function initMiddleware(middleware: any) {
+  return (req: NextApiRequest, res: NextApiResponse) =>
     new Promise((resolve, reject) => {
-      middleware(req, res, (result) => {
+      middleware(req, res, (result: Promise<void>) => {
         if (result instanceof Error) {
           return reject(result);
         }
@@ -20,7 +21,10 @@ const cors = initMiddleware(
   })
 );
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { latitude, longitude, count } = req.query;
   await cors(req, res);
 
