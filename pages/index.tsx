@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, FunctionComponent } from "react";
 import Head from "next/head";
 
 import globalStyles from "../styles/globalStyles";
@@ -10,13 +10,25 @@ import Loading from "../components/Loading";
 
 import { SPLYT_COORDINATES } from "../constants/constants";
 
-export default function Home() {
-  const [count, setCount] = useState(1);
-  const [result, setResult] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+import { InitialState } from "../types/Types";
 
-  const handleSubmit = (driversCount) => {
+const mapDefaultProps = {
+  center: {
+    lat: SPLYT_COORDINATES.lat,
+    lng: SPLYT_COORDINATES.long,
+  },
+  zoom: 14,
+};
+
+const Home: FunctionComponent<InitialState> = () => {
+  const [count, setCount] = useState<InitialState["initialCount"]>("1");
+  const [result, setResult] = useState<InitialState["initialResult"]>(null);
+  const [error, setError] = useState<InitialState["initialError"]>(null);
+  const [isLoading, setIsLoading] = useState<InitialState["initialIsLoading"]>(
+    false
+  );
+
+  const handleSubmit = (driversCount: string) => {
     setCount(driversCount);
   };
 
@@ -54,7 +66,18 @@ export default function Home() {
         {/*
               Enhance/Improvement: use 'isLoading' variable to handle Loading state
         */}
-        {!result ? <Loading /> : <Map driversList={result.drivers} />}
+        {!result ? (
+          <Loading />
+        ) : (
+          <Map
+            driversList={result.drivers}
+            center={{
+              lat: mapDefaultProps.center.lat,
+              lng: mapDefaultProps.center.lng,
+            }}
+            zoom={mapDefaultProps.zoom}
+          />
+        )}
       </div>
 
       <style jsx>{appContainerStyles}</style>
@@ -63,4 +86,6 @@ export default function Home() {
       </style>
     </>
   );
-}
+};
+
+export default Home;

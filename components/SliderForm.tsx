@@ -2,14 +2,20 @@ import React, { useState } from "react";
 
 import formStyles from "../styles/formStyles";
 
-const SliderForm = ({ onFormSubmit, defaultCount }) => {
+export interface FormProps {
+  onFormSubmit: (driversCount: string) => void;
+  defaultCount: string;
+}
+
+const SliderForm = (props: FormProps) => {
+  const { onFormSubmit, defaultCount } = props;
   const [driversCount, setDriversCount] = useState(defaultCount);
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setDriversCount(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onFormSubmit(driversCount);
   };
@@ -36,7 +42,8 @@ const SliderForm = ({ onFormSubmit, defaultCount }) => {
             <span className="rangeValue">50</span>
           </div>
           <button data-testid="form-button">
-            Show {driversCount} {driversCount > 1 ? "drivers" : "driver"}
+            Show {driversCount}{" "}
+            {parseInt(driversCount) > 1 ? "drivers" : "driver"}
           </button>
         </div>
       </form>

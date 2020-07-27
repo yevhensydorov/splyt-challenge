@@ -2,19 +2,21 @@ import GoogleMapReact from "google-map-react";
 
 import TaxiMarker from "./TaxiMarker";
 
-import { SPLYT_COORDINATES, GOOGLE_MAPS_API_KEY } from "../constants/constants";
+import { GOOGLE_MAPS_API_KEY } from "../constants/constants";
 
-const mapDefaultProps = {
-  center: {
-    lat: SPLYT_COORDINATES.lat,
-    lng: SPLYT_COORDINATES.long,
-  },
-  zoom: 14,
+import { Driver, InitialCenter } from "../types/Types";
+
+type MapProps = {
+  driversList: Driver[];
+  center: InitialCenter;
+  zoom: number;
 };
 
-const Map = ({ driversList }) => {
+const Map = (props: MapProps) => {
+  const { driversList, center, zoom } = props;
+
   const renderTaxiMarkers = () => {
-    const driversMarkers = driversList.map((driver) => {
+    const driversMarkers = driversList.map((driver: Driver) => {
       const { latitude, longitude } = driver.location;
 
       return (
@@ -34,8 +36,8 @@ const Map = ({ driversList }) => {
     <div style={{ height: "50vh", width: "100%" }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: GOOGLE_MAPS_API_KEY }}
-        defaultCenter={mapDefaultProps.center}
-        defaultZoom={mapDefaultProps.zoom}
+        defaultCenter={center}
+        defaultZoom={zoom}
         distanceToMouse={() => {}}
         fullscreenControl={false}
       >

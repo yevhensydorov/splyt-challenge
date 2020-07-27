@@ -1,6 +1,8 @@
 import MapPin from "../assets/MapMarker.svg";
 
-const TaxiMarker = ({ markerText }) => {
+const TaxiMarker = (props: any) => {
+  const { markerText } = props;
+
   return (
     <div
       style={{
