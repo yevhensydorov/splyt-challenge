@@ -12,10 +12,10 @@
     "@svgr/webpack": "^5.4.0",
     "cors": "^2.8.5",
     "google-map-react": "^1.1.7",
-    "next": "9.4.4",
+    "next": "9.5.5",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "styled-jsx": "^3.3.0"
+    "styled-jsx": "^5.1.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.1",
